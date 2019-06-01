@@ -1,0 +1,10 @@
+textarea {
+    display: block;
+}
+.wizard > .content {
+    min-height: 40em;
+}
+
+.steps ul li .number {
+    display: none;
+}

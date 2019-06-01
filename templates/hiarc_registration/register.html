@@ -1,0 +1,136 @@
+{% extends "base_generic.html" %}
+
+{% comment %}
+* form
+* errors : 에러메시지 달기 위한 목적
+{% endcomment %}
+
+{% load bootstrap %}
+
+{% block main_content %}
+
+{% load static %}
+    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
+
+  <form id="entry-form" class="wizard" action="/signup" method="POST">
+      {% csrf_token %}
+      <h2>
+        <i class="far fa-address-book fa-3x"></i>
+        <span class="landscape">연락처</span>           
+      </h2>
+      <fieldset>
+        <label for="email">이메일 *</label>
+        <input id="email" name="email" type="text" class="required email"/><br>
+        {% for error in errors.email %}
+          <p class="form-error {{error.code}}">{{ error.message }}</p>
+        {% endfor %}
+          
+            
+        <label for="real_name">이름 *</label>
+        <input id="real_name" name="real_name" type="text" class="required" /><br>
+
+        <label for="username">유저네임 *</label>
+        <input id="username" name="username" type="text" class="required" /><br>
+        
+        {% for error in errors.username %}
+          <p class="form-error {{error.code}}">{{ error.message }}</p>
+        {% endfor %}
+
+        <label for="password">비밀번호 *</label>
+        <input id="password1" name="password1" type="password" class="required" /><br>        
+        <label for="password">비밀번호 확인 *</label>
+        <input id="password2" name="password2" type="password" class="required" /><br>
+        {% for error in errors.password2 %}
+          <p class="form-error {{error.code}}">{{ error.message }}</p>
+        {% endfor %} 
+
+        <label for="student_id" type="text">학번 *</label>
+        <input id="student_id" name="student_id" type="text" class="required" /><br>
+        <label for="phone_number" type="text">핸드폰 번호 *    ( - 제외 입력 )</label>
+        <input id="phone_number" name="phone_number" type="text" class="required" />
+        <p><br>(*) 필수입력 정보입니다.</p>
+      </fieldset>
+
+      <h2>
+        <i class="far fa-user fa-3x"></i>     
+        <span class="landscape">재학정보</span>   
+      </h2>
+      <fieldset>
+        <label for="status" type="text">현재 상태</label><br>
+        <select id="status" name="status" class="required">
+          <option value="1">재학생</option>
+          <option value="2">군휴학</option>
+          <option value="3">휴학생</option>
+          <option value="4">졸업생</option>
+        </select><br><br>
+        <label for="semester"  type="text">학기</label><br>
+        <select id="semester" name="semester" class="required">
+          <option value="0">신입생</option>
+          <option value="1">1학년 1학기</option>
+          <option value="2">1학년 2학기</option>
+          <option value="3">2학년 1학기</option>
+          <option value="4">2학년 2학기</option>
+          <option value="5">3학년 1학기</option>
+          <option value="6">3학년 2학기</option>
+          <option value="7">4학년 1학기</option>
+          <option value="8">4학년 2학기</option>
+          <option value="9">초과학기</option>
+        </select><br><br>
+        <label for="major" type="text">전공</label><br>
+        <select id="major" name="major" class="required">
+          <option value="01">컴퓨터공학과</option>
+          <option value="02">산업공학과</option>
+          <option value="03">전기전자공학부</option>
+          <option value="04">법학부</option>
+          <option value="05">자율전공학부</option>
+          <option value="99">없음</option>
+        </select><br><br>
+        <label for="minor"  type="text">부전공</label><br>
+        <select id="minor" name="minor" class="required">
+          <option value="01">컴퓨터공학과</option>
+          <option value="02">산업공학과</option>
+          <option value="03">전기전자공학부</option>
+          <option value="04">법학부</option>
+          <option value="05">자율전공학부</option>
+          <option value="99">없음</option>
+        </select><br><br>
+      </fieldset>
+
+      <h2>
+        <i class="far fa-comment-dots fa-3x"></i>
+        <span class="landscape">코멘트</span>                  
+      </h2>
+      <fieldset>
+        <legend>Messages</legend>
+        <label for="motivation">지원동기</label>
+        <textarea name="motivation" name="motivation" class="required" style="resize: none;" type="text" cols="60" rows="4.5"></textarea><br><br>
+        <label for="portfolio">포트폴리오</label><br>
+        <textarea name="portfolio" name="portfolio" style="resize: none;" type="text" cols="60" rows="4.5"></textarea><br><br>
+        <label for="comment">하고싶은 말</label><br>
+        <textarea name="comment" class="required" name="comment" style="resize: none;" type="text" cols="60" rows="4.5"></textarea><br><br>
+      </fieldset>
+
+      <h2>        
+        <i class="far fa-id-badge fa-3x"></i>        
+        <span class="landscape">외부 계정</span>                  
+        
+      </h2>
+      <fieldset>
+        <label for="Codeforces_id">codeforces id</label>
+        <input id="Codeforces_id" name="codeforces_id" type="text" /><br>
+        <label for="boj_id">BOJ id</label>
+        <input id="boj_id" name="boj_id" type="text" /><br>
+        <label for="github_id">github id</label>
+        <input id="github_id" name="github_id" type="text" /><br>
+        <label for="blog_url">blog url</label>
+        <input id="blog_url" name="blog_url" type="text" /><br>
+      </fieldset>
+
+</form>
+
+  {% comment %}
+  form wizard jquery plugin
+  {% endcomment %}
+
+  
+{% endblock %}
